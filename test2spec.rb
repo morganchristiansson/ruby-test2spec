@@ -17,5 +17,9 @@ data.gsub! /setup do/, 'before :each do'
 #data.gsub! /assert_equal ([^,]+), (.*)/, '(\2).should == \1'
 data.gsub! /assert_equal ((?:\[.*?\]|\(.*?\)|[^,\(\[])+), (.+)/, '\2.should == \1'
 
+data.gsub! /assert_nil (.*)/, '\1.should be_nil'
+
+data.gsub! /assert (.*)/, '\1.should be_true'
+
 data.gsub! /(\s+)should "/, '\1it "should '
 puts data
