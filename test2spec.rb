@@ -13,12 +13,17 @@ while(m = data.match /(^\s+)should(_not)?_(belong_to|have_one|have_many|allow_ma
 end
 
 data.gsub! /setup do/, 'before :each do'
+data.gsub! /setup {(.*)}/, 'before(:each) {\1}'
+
+#TODO automatically convert assert @xxx.verb? to @xxx.should be_verb
+#TODO automatically convert assert !@xxx.verb? to @xxx.should_not be_verb
 
 #data.gsub! /assert_equal ([^,]+), (.*)/, '(\2).should == \1'
 data.gsub! /assert_equal ((?:\[.*?\]|\(.*?\)|[^,\(\[])+), (.+)/, '\2.should == \1'
 
 data.gsub! /assert_nil (.*)/, '\1.should be_nil'
 
+data.gsub! /assert !(.*)/, '\1.should be_false'
 data.gsub! /assert (.*)/, '\1.should be_true'
 
 data.gsub! /(\s+)should "/, '\1it "should '
