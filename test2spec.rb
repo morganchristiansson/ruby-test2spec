@@ -1,5 +1,7 @@
 data = $stdin.read
 
+data.gsub! /require 'test_helper'/, 'require \'spec_helper\''
+
 data.gsub! /class (.*)Test < ActiveSupport::TestCase/, 'describe \1 do'
 
 while(m = data.match /(^\s+)should(_not)?_(belong_to|have_one|have_many|allow_mass_assignment_of) (:.+)/)
@@ -13,7 +15,7 @@ end
 data.gsub! /setup do/, 'before :each do'
 
 #data.gsub! /assert_equal ([^,]+), (.*)/, '(\2).should == \1'
-data.gsub! /assert_equal ([^,]+), (.*)/, '\2.should == \1'
+data.gsub! /assert_equal ((?:\[.*?\]|\(.*?\)|[^,\(\[])+), (.+)/, '\2.should == \1'
 
 data.gsub! /(\s+)should "/, '\1it "should '
 puts data
