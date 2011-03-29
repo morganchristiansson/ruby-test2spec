@@ -16,6 +16,7 @@ data.gsub! /setup do/, 'before :each do'
 data.gsub! /setup \{(.*)\}/, 'before(:each) {\1}'
 
 #TODO automatically convert assert @xxx.verb? to @xxx.should be_verb
+data.gsub! /assert !([^\s\.]+)\.(\w+)\?/, '\1.should_not be_\2'
 data.gsub! /assert ([^\s\.]+)\.(\w+)\?/, '\1.should be_\2'
 data.gsub! /assert_false ([^\s\.]+)\.(\w+)\?/, '\1.should_not be_\2'
 data.gsub! /assert_equal false, ([^\s\.]+)\.(\w+)\?/, '\1.should_not be_\2'
@@ -24,7 +25,7 @@ data.gsub! /assert_equal false, ([^\s\.]+)\.(\w+)\?/, '\1.should_not be_\2'
 #data.gsub! /assert_equal ([^,]+), (.*)/, '(\2).should == \1'
 data.gsub! /assert_equal ((?:\[.*?\]|\(.*?\)|[^,\(\[])+), (.+)/, '\2.should == \1'
 
-data.gsub! /assert_(not_)?nil (.*)/, '\2.should\1 be_nil'
+data.gsub! /assert(_not)?_nil (.*)/, '\2.should\1 be_nil'
 
 data.gsub! /assert !(.*)/, '\1.should be_false'
 data.gsub! /assert (.*)/, '\1.should be_true'
