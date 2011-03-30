@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 data = $stdin.read
 
 data.gsub! /require 'test_helper'/, 'require \'spec_helper\''
