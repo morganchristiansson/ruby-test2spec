@@ -6,7 +6,7 @@ data.gsub! /require 'test_helper'/, 'require \'spec_helper\''
 
 data.gsub! /class (.*)Test < ActiveSupport::TestCase/, 'describe \1 do'
 
-while(m = data.match /(^\s+)should(_not)?_(belong_to|have_one|have_many|allow_mass_assignment_of) (:.+)/)
+while(m = data.match /(^\s+)should(_not)?_(belong_to|have_one|have_many|allow_mass_assignment_of|validate_presence_of) (:.+)/)
   replace = []
   m[4].split(/,\s+/).each do |key|
     replace.push "#{m[1]}it { should#{m[2]} #{m[3]} #{key} }"
