@@ -36,6 +36,7 @@ data.gsub! /(\s+)should "/, '\1it "should '
 
 # Deal with Mocha -> Rspec Mocks
 data.gsub! /\.expects\(/, '.should_receive('
-data.gsub! /\.return\(/, '.and_return('
+data.gsub! /\.returns\(/, '.and_return('
+data.gsub! /\.stubs\(/, '.stub('
 
 puts data
