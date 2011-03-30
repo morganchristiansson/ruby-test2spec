@@ -35,7 +35,7 @@ data.gsub! /assert (.*)/, '\1.should be_true'
 data.gsub! /(\s+)should "/, '\1it "should '
 
 # Deal with Mocha -> Rspec Mocks
-data.gsub! /\.expects(/, '.should_receive('
-data.gsub! /\.return(/, '.and_return('
+data.gsub! /\.expects\(/, '.should_receive('
+data.gsub! /\.return\(/, '.and_return('
 
 puts data
